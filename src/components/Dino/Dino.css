@@ -1,0 +1,535 @@
+.expedition {
+  max-width: 1120px;
+  margin: auto;
+  padding: 48px 28px 24px;
+  text-align: left;
+  color: #243e38;
+}
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.eyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #6d8179;
+}
+h1 {
+  font-size: 42px;
+  letter-spacing: -2px;
+  margin: 10px 0;
+}
+h1 span {
+  color: #d18240;
+}
+.masthead p {
+  margin: 0;
+  color: #77847d;
+  font-size: 14px;
+}
+.project-tag {
+  border: 1px solid #ced9cc;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.game-card {
+  border: 1px solid #d3dbcd;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px #344b3610;
+  background: #fffef8;
+}
+.dashboard {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  padding: 22px 28px;
+}
+.dashboard strong {
+  font-family: monospace;
+  font-size: 27px;
+  display: block;
+  margin-top: 5px;
+  letter-spacing: 2px;
+}
+.biome-label {
+  margin-left: auto;
+}
+.biome-label b {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+}
+.shield-status {
+  font-size: 12px;
+  color: #78877f;
+  border: 1px solid #dce2d8;
+  padding: 9px 12px;
+  border-radius: 20px;
+}
+.shield-status.active {
+  background: #d9f5ed;
+  color: #196b60;
+}
+.scene {
+  height: auto;
+  aspect-ratio: 900/320;
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+  background: #f7dfb2;
+}
+.world {
+  position: absolute;
+  width: 900px;
+  height: 320px;
+  transform-origin: top left;
+}
+.snow {
+  background: #d9e9ec;
+}
+.volcanic {
+  background: #e5bdac;
+}
+.night-sky {
+  position: absolute;
+  inset: 0;
+  background: #172d48;
+}
+.sun,
+.moon {
+  position: absolute;
+  left: 720px;
+  top: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eaaa55;
+  box-shadow: 0 0 35px #ffd48a66;
+}
+.moon {
+  left: 710px;
+  background: #eff0d7;
+  box-shadow: 0 0 30px #f4f5e044;
+}
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #fff7dc;
+  border-radius: 50%;
+}
+.cloud {
+  position: absolute;
+  width: 92px;
+  height: 18px;
+  border-radius: 30px;
+  background: #ffffff80;
+}
+.cloud:before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  bottom: 0;
+  width: 40px;
+  height: 35px;
+  border-radius: 50%;
+  background: inherit;
+}
+.mountain {
+  position: absolute;
+  bottom: 62px;
+  width: 590px;
+  height: 150px;
+  clip-path: polygon(
+    0 100%,
+    20% 40%,
+    35% 68%,
+    55% 0,
+    75% 62%,
+    90% 40%,
+    100% 100%
+  );
+  background: #be995a;
+  opacity: 0.25;
+}
+.far {
+  left: 280px;
+}
+.near {
+  left: -90px;
+  height: 100px;
+  opacity: 0.2;
+}
+.snow .mountain {
+  background: #688f9b;
+}
+.volcanic .mountain {
+  background: #842e29;
+}
+.ground {
+  position: absolute;
+  bottom: 0;
+  height: 62px;
+  width: 100%;
+  border-top: 3px solid #997b4b;
+  background-color: #d8be88;
+  background-image: radial-gradient(#9b8054 1px, transparent 1px);
+  background-size: 27px 19px;
+}
+.snow .ground {
+  background-color: #f1f5ef;
+  border-color: #9bb8be;
+  background-image: radial-gradient(#b8cdd0 1px, transparent 1px);
+}
+.volcanic .ground {
+  background-color: #564742;
+  border-color: #e58051;
+  background-image: radial-gradient(#dc8861 1px, transparent 1px);
+}
+.dinosaur {
+  position: absolute;
+  left: 92px;
+  width: 44px;
+  height: 54px;
+  background: url("./img/trex.png") center/100% 100% no-repeat;
+  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 2px #fff);
+}
+.dinosaur.duck {
+  width: 56px;
+  height: 28px;
+}
+.dinosaur.shielded {
+  outline: 3px solid #54cbbf;
+  outline-offset: 8px;
+  border-radius: 40%;
+  background-color: #b4fff533;
+  box-shadow: 0 0 25px #7dfff4;
+}
+.dinosaur.immune {
+  opacity: 0.55;
+  filter: drop-shadow(0 0 7px #54fff1);
+}
+.obstacle {
+  position: absolute;
+  filter: drop-shadow(0 0 2px #fff8);
+}
+.cactus {
+  background: url("./img/cactus.png") center/100% 100% no-repeat;
+}
+.snow .cactus {
+  filter: brightness(1.7) sepia(0.3) saturate(0.4) drop-shadow(0 0 2px #326174);
+}
+.volcanic .cactus {
+  filter: sepia(1) saturate(4) hue-rotate(325deg) drop-shadow(0 0 2px #ffb075);
+}
+.bird {
+  background: #394a53;
+  border-radius: 60% 50% 45% 45%;
+  border: 1px solid #f8e9cc;
+  box-sizing: border-box;
+}
+.snow .bird {
+  background: #527c9b;
+}
+.volcanic .bird {
+  background: #a14437;
+}
+.wing {
+  position: absolute;
+  left: 10px;
+  top: -9px;
+  width: 23px;
+  height: 17px;
+  background: #788f93;
+  clip-path: polygon(0 100%, 20% 0, 100% 100%);
+}
+.beak {
+  position: absolute;
+  left: -9px;
+  top: 5px;
+  border-right: 10px solid #efba6f;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.absorbed {
+  opacity: 0.3;
+}
+.pickup {
+  position: absolute;
+  width: 30px;
+  height: 34px;
+  line-height: 34px;
+  font-size: 34px;
+  color: #136d6b;
+  background: #c0fff0;
+  border-radius: 40%;
+  box-shadow: 0 0 16px #adfff0;
+  text-align: center;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fbf8e9dc;
+  text-align: center;
+  padding: 16px;
+}
+.overlay h2 {
+  font-size: 28px;
+  letter-spacing: -0.8px;
+  margin: 10px 0;
+}
+.overlay p {
+  font-size: 14px;
+  color: #6b7d72;
+  margin: 0 0 18px;
+}
+button {
+  cursor: pointer;
+  font: inherit;
+  background: #f5f7ef;
+  color: #314c42;
+  border: 1px solid #cbd5c6;
+  border-radius: 7px;
+  padding: 9px 13px;
+  font-size: 12px;
+}
+button:hover {
+  background: #e4ecdd;
+}
+button:focus-visible {
+  outline: 3px solid #cd8444;
+  outline-offset: 3px;
+}
+.primary {
+  background: #2d5545;
+  color: #fff;
+  padding: 12px 20px;
+  border: 0;
+}
+.primary:hover {
+  background: #1c3e31;
+}
+.toast {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: #285846;
+  border-radius: 8px;
+  z-index: 3;
+}
+.toast:not(:empty) {
+  padding: 12px 18px;
+}
+.controls {
+  display: flex;
+  gap: 25px;
+  padding: 18px 25px;
+  align-items: center;
+  font-size: 12px;
+  color: #697b70;
+  flex-wrap: wrap;
+}
+kbd {
+  font-family: inherit;
+  font-size: 11px;
+  background: #eff0e7;
+  border: 1px solid #d6ddce;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+.hint {
+  margin-left: auto;
+  font-size: 11px;
+}
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 22px;
+  margin-top: 24px;
+}
+.panel {
+  background: #fffef8;
+  border: 1px solid #d8dfd1;
+  border-radius: 14px;
+  padding: 24px;
+}
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.panel-title h2 {
+  font-size: 17px;
+  margin: 0;
+  letter-spacing: -0.4px;
+}
+.panel-title > span {
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  color: #879080;
+}
+.empty {
+  font-size: 14px;
+  line-height: 1.8;
+  padding: 16px 0;
+  color: #879080;
+}
+.scores {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.scores li {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid #edf0e5;
+  font-size: 12px;
+}
+.rank {
+  color: #a3aa98;
+  font-family: monospace;
+}
+.scores strong {
+  margin-left: auto;
+  font-family: monospace;
+  font-size: 16px;
+}
+small {
+  font-size: 10px;
+  font-weight: 400;
+  color: #84927e;
+}
+.storage-note {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #8b9583;
+  margin-top: 20px;
+}
+.achievements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 14px;
+}
+.achievement {
+  display: flex;
+  gap: 10px;
+}
+.badge {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  background: #eeefe6;
+  border: 1px solid #dfe3d6;
+  border-radius: 10px;
+  color: #9ba58f;
+}
+.unlocked .badge {
+  background: #f7e8b8;
+  color: #947321;
+  border-color: #e7d591;
+}
+.achievement h3 {
+  font-size: 12px;
+  margin: 0 0 6px;
+}
+.achievement small {
+  display: block;
+  margin-top: 3px;
+  font-size: 9px;
+}
+.achievement p {
+  font-size: 11px;
+  color: #85907e;
+  line-height: 1.5;
+  margin: 0;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  color: #8c9582;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  margin-top: 25px;
+}
+footer span {
+  letter-spacing: 0;
+}
+@media (max-width: 700px) {
+  .expedition {
+    padding: 26px 14px;
+  }
+  .project-tag {
+    display: none;
+  }
+  h1 {
+    font-size: 32px;
+  }
+  .dashboard {
+    gap: 15px;
+    padding: 16px;
+    flex-wrap: wrap;
+  }
+  .dashboard strong {
+    font-size: 22px;
+  }
+  .shield-status {
+    font-size: 10px;
+  }
+  .panels {
+    grid-template-columns: 1fr;
+  }
+  .controls {
+    gap: 14px;
+    padding: 14px;
+  }
+  .hint {
+    margin-left: 0;
+  }
+  .overlay h2 {
+    font-size: 20px;
+  }
+  .overlay p {
+    font-size: 12px;
+    margin-bottom: 9px;
+  }
+  .overlay .eyebrow {
+    font-size: 8px;
+  }
+  .overlay .primary {
+    padding: 8px 12px;
+  }
+  .scene {
+    min-height: 220px;
+  }
+  .world {
+    top: auto;
+    bottom: 0;
+  }
+  footer {
+    gap: 16px;
+  }
+  .masthead {
+    margin-bottom: 20px;
+  }
+}
