@@ -1,68 +1,57 @@
-# Dino Expedition — CSC321 Homework 3
+# Dino Game — CSC321 Homework 3
 
-An expanded version of the professor’s React dinosaur starter. The original `App → Dino` component structure, Create React App setup, and dinosaur/cactus assets are preserved. No assignment PDF was present in the workspace.
+This is my CSC321 Homework 3 Dino game, built from the provided React starter. It keeps the starter's `App` and `Dino` component structure and turns the original runner into a longer game with obstacles, changing scenery, saved scores, and achievements.
 
-## Install and launch
+## Added features
 
-Use Node.js and npm compatible with Create React App 5 (validated here with the installed environment).
+1. **Shield power-up:** A turquoise hexagon appears during a run. Collecting it gives the dinosaur a shield that absorbs one obstacle collision. After a hit, the shield is removed and the dinosaur is briefly invulnerable.
 
-```sh
-npm install --cache .npm-cache
-npm start
-```
+2. **Ducking and flying obstacles:** The game adds low and high birds alongside the cactus obstacles. Holding the duck key lowers the dinosaur's collision box so it can pass under high birds. Cacti and low birds can be cleared by jumping.
 
-Open http://localhost:3000. If dependencies are already installed, just run `npm start`.
+3. **Changing biomes:** The background begins in the Desert, changes to Snow at 150 points, and changes to Volcanic at 300 points. The sequence repeats every 450 points, and each biome changes the ground, mountains, cactus, and bird colors.
 
-```sh
-npm run build
-CI=true npm test -- --watchAll=false --runInBand
-```
+4. **Day and night cycle:** The sky gradually changes as the run continues. The sun fades out, the moon and stars appear, and moving clouds remain in the scene. One complete cycle takes 45 seconds.
 
-The production build is written to `build/`. Do not open `public/index.html` directly; use the development server or serve the build over HTTP.
+5. **Local leaderboard:** When a run ends, its score and date are recorded. The game sorts completed runs by score, displays the five highest results, and uses the highest one as the personal best.
+
+6. **Achievements:** Four achievements track the first jump, reaching 100 points, surviving for 45 seconds, and using a shield to absorb a collision. A notification appears when an achievement is unlocked.
 
 ## Controls
 
-| Key / button | Action |
-| --- | --- |
-| Space or Arrow Up | Start and jump; release before the next jump |
-| Hold Arrow Down or S | Crouch; release to stand (also works in the air) |
-| P or Pause/Resume button | Pause/resume |
-| Start expedition | Begin a run |
-| Restart expedition | Start a fresh run after game over |
+- `Space` or `Arrow Up`: start the game and jump
+- Hold `Arrow Down` or `S`: duck; release the key to stand
+- `P`: pause or resume the game
 
-The page suppresses scrolling for gameplay keys. Holding jump does not repeatedly jump. Switching windows automatically pauses and releases crouch. Keyboard controls continue working after clicking buttons. All movement, score, spawn timers, invulnerability, and scenery freeze while paused.
+The on-screen buttons can also start, restart, pause, and resume a run. Moving away from the browser window automatically pauses an active game.
 
-## Six new features and demonstrations
+## Setup and running the game
 
-1. **Shield power-up.** Collect the turquoise hexagon at ground level. The first appears after about five seconds plus travel time, with later ones spaced roughly 9–14 seconds apart. A ring and “Shield active” label show protection. Hit an obstacle: the shield disappears, the obstacle fades, and the dinosaur receives 1.2 seconds of invulnerability. That obstacle cannot hit again. Shields do not stack.
-2. **Ducking and flying obstacles.** Hold Down/S to flatten the dinosaur and reduce its collision height from 54 to 28 world units. Duck beneath higher birds; jump over low birds and cacti. All birds can also be jumped. Obstacles have at least 1.65 seconds of separation, exceeding the approximately 0.7-second jump duration. Speed increases gradually and is capped. Shield spawns are separated from nearby obstacles.
-3. **Changing biomes.** Reach 150 points to enter Snow and 300 to enter Volcanic; at 450 the sequence returns to Desert. Each has its own sky, mountain, ground, cactus, and bird colors. The dashboard displays the current biome. Scores grow at 10 points per second.
-4. **Day/night scenery.** Keep running to see moving clouds, the sun fading into a moon, and stars appearing against a dark sky. The cycle lasts 45 seconds, with deepest night at 22.5 seconds. Outlined obstacles and the dinosaur stay visible. Pause to verify scenery freezes too.
-5. **Persistent local leaderboard.** Finish several runs to populate the five highest scores, their dates, and the personal best. Refresh to verify persistence. Only completed runs count. Invalid entries are filtered; blocked storage or invalid JSON does not crash the game. A storage message explains when progress is session-only. Records use the browser’s local date format and the `csc321-dino-v1` localStorage key.
-6. **Persistent achievements.** Jump once, reach 100 points, survive a full 45-second day/night cycle, and absorb a collision with a shield. Each milestone displays a short notification and changes its panel entry from Locked to Unlocked. Refresh to verify saved unlocks. Requirements are visible below the game.
+Install the project dependencies:
 
-Restart clears movement, score, biome/day-cycle time, hazards, pickups, crouch, shield, invulnerability, and pending notifications. Saved records and achievements remain.
+```sh
+npm install
+```
 
-## Implementation and dependencies
+Start the development server:
 
-`src/components/Dino/game.js` contains elapsed-time physics, world-space collision rectangles, spawns, milestones, and storage validation. `Dino.js` connects the engine to React, keyboard input, a cleaned-up animation loop, and responsive rendering. Rendering and collisions share a 900 × 320 world, including the crouched dinosaur size. Small physics substeps avoid skipping collisions. Long frame gaps are capped to avoid teleporting after a suspended tab; this intentionally slows simulation during severe stalls.
+```sh
+npm start
+```
 
-Existing dependencies remain unchanged: React/React DOM 18, react-scripts 5, Testing Library packages, and web-vitals; exact versions are in `package-lock.json`. No new application dependencies were added. Browser verification used temporary Playwright tooling outside this repository.
+The game opens at `http://localhost:3000` by default.
 
-Asset credits: `src/components/Dino/img/trex.png` and `cactus.png` were supplied in the professor’s starter project; original artist/license information was not provided. Other game scenery, birds, and shield effects use CSS and text symbols. The `public/` React icons originate from the Create React App starter. No external images or fonts are downloaded during play.
+To create a production build, run:
 
-## Validation
+```sh
+npm run build
+```
 
-- Production build compiles without warnings.
-- Five automated tests cover jump/landing, crouch collision bounds, shield collection/absorption, invulnerability, fatal collisions, pause, restart defaults, elapsed-time movement, biome/night milestones, storage validation, top-five ranking, and storage failures.
-- Chromium checks exercise rendered keyboard controls, jump, crouch/release, pause/resume, collection, shield hit, flying-obstacle collisions, restart, biomes, day/night, all four achievements, saved scores/unlocks after reload, malformed storage, and mobile page width. Later biome/collision scenarios are arranged through the existing React state for deterministic verification, rather than requiring a manual 45-second survival run. There are no shipped debug controls.
-- `submission-screenshot.png` is an actual Chromium capture of the running app. Browser verification is automated; Safari and a full manual playthrough have not been performed.
+The generated files are placed in the `build/` directory.
 
-## Submission
+## Saved progress and credits
 
-1. Run `npm start` and review the game. The included `submission-screenshot.png` shows it running. To take your own on a Mac, press **Shift–Command–4** and drag over the game window (or press Space afterward to capture a window). Rename the capture `submission-screenshot.png` if replacing it.
-2. Create a **public GitHub repository** when ready. Include `src/`, `public/`, `README.md`, `.gitignore`, `package.json`, `package-lock.json`, and the screenshot. Preserve the assets inside `src/`. The old `package-lock.backup.json` is unnecessary for submission.
-3. Exclude `node_modules/`, `.npm-cache/`, and `build/` (already covered by `.gitignore`). Confirm the repository can be cloned and launched with the commands above.
-4. Submit the public repository URL and the running-game screenshot according to your professor’s submission portal instructions. Check any assignment PDF provided separately for additional requirements.
+The leaderboard and unlocked achievements are saved in the browser's local storage under the key `csc321-dino-v1`. This progress stays available after a page refresh in the same browser. If local storage is unavailable or contains invalid data, progress is kept only for the current session until it can be saved again.
 
-No repository has been published or pushed by this implementation.
+The `trex.png` and `cactus.png` images were included with the professor's starter project; no original artist or license information was provided. The React icons in `public/` come from the Create React App starter. The birds, shield, and scenery are drawn with CSS and text symbols.
+
+![Dino game submission screenshot](submission-screenshot.png)
